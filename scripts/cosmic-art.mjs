@@ -1,4 +1,20 @@
 // Original conceptual illustrations, not manuscript figures.
+const moons = [
+  { color: 'moon-fill', glow: '#e7b1ff', radius: 7, rx: 215, ry: 61, tilt: -28, period: 26000, phase: -.5 },
+  { color: 'moon-ice', glow: '#8df0ff', radius: 5, rx: 215, ry: 61, tilt: -28, period: 38000, phase: 2.1 },
+  { color: 'moon-gold', glow: '#ffd0a2', radius: 9, rx: 222, ry: 143, tilt: 18, period: 47000, phase: 3.5, ring: true },
+  { color: 'moon-blue', glow: '#99baff', radius: 6, rx: 176, ry: 167, tilt: -35, period: 56000, phase: 1.28 },
+];
+const moonArtwork = moon => {
+  const tilt = moon.tilt * Math.PI / 180;
+  const x = moon.rx * Math.cos(moon.phase), y = moon.ry * Math.sin(moon.phase);
+  const depth = (Math.sin(moon.phase) + 1) / 2;
+  return `<g class="orbiting-moon" data-orbit-rx="${moon.rx}" data-orbit-ry="${moon.ry}" data-orbit-tilt="${moon.tilt}" data-orbit-period="${moon.period}" data-orbit-phase="${moon.phase}" transform="translate(${250+x*Math.cos(tilt)-y*Math.sin(tilt)} ${246+x*Math.sin(tilt)+y*Math.cos(tilt)}) scale(${.78+depth*.32})" opacity="${.55+depth*.45}">
+    <circle r="${moon.radius+7}" fill="${moon.glow}" opacity=".2" filter="url(#planet-soft-glow)"/>
+    <circle r="${moon.radius}" fill="url(#${moon.color})"/>
+    ${moon.ring ? `<ellipse rx="17" ry="4.5" transform="rotate(-24)" stroke="#f6d9b9" stroke-opacity=".65" stroke-width=".8"/>` : ''}
+  </g>`;
+};
 export const heroArt = `<svg class="hero-art" viewBox="0 0 500 500" fill="none" aria-hidden="true">
   <defs>
     <radialGradient id="planet-body" cx=".26" cy=".19" r=".88">
@@ -16,16 +32,21 @@ export const heroArt = `<svg class="hero-art" viewBox="0 0 500 500" fill="none" 
     <linearGradient id="planet-rim" x1="155" y1="147" x2="340" y2="360" gradientUnits="userSpaceOnUse"><stop stop-color="#c4fcff"/><stop offset=".36" stop-color="#73baff" stop-opacity=".5"/><stop offset=".7" stop-color="#a175f5" stop-opacity=".15"/><stop offset="1" stop-color="#bf83ff" stop-opacity=".6"/></linearGradient>
     <linearGradient id="planet-ring" x1="35" y1="215" x2="470" y2="288" gradientUnits="userSpaceOnUse"><stop stop-color="#7ac9ff" stop-opacity=".15"/><stop offset=".25" stop-color="#96f2ff"/><stop offset=".58" stop-color="#a3a3ff"/><stop offset=".84" stop-color="#e1b2ff"/><stop offset="1" stop-color="#9f80f5" stop-opacity=".1"/></linearGradient>
     <radialGradient id="moon-fill" cx=".3" cy=".25"><stop stop-color="#fff1de"/><stop offset=".45" stop-color="#f2baff"/><stop offset="1" stop-color="#7553c1"/></radialGradient>
+    <radialGradient id="moon-ice" cx=".25" cy=".2" r=".8"><stop stop-color="#e1ffff"/><stop offset=".4" stop-color="#79e3e7"/><stop offset="1" stop-color="#245d91"/></radialGradient>
+    <radialGradient id="moon-gold" cx=".25" cy=".2" r=".8"><stop stop-color="#fff2ce"/><stop offset=".4" stop-color="#dfa472"/><stop offset="1" stop-color="#563150"/></radialGradient>
+    <radialGradient id="moon-blue" cx=".25" cy=".2" r=".8"><stop stop-color="#d9eaff"/><stop offset=".4" stop-color="#829be5"/><stop offset="1" stop-color="#36316c"/></radialGradient>
     <filter id="planet-soft-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="5"/></filter>
     <clipPath id="planet-clip"><circle cx="250" cy="246" r="122"/></clipPath>
   </defs>
   <circle cx="250" cy="246" r="177" fill="url(#planet-halo)"/>
   <g class="planet-system">
+    <ellipse cx="250" cy="246" rx="222" ry="143" transform="rotate(18 250 246)" stroke="#aca8ed" stroke-width=".6" stroke-opacity=".13" stroke-dasharray="1 8"/>
     <g transform="rotate(-28 250 246)">
       <path d="M35 246a215 61 0 0 1 430 0" stroke="url(#planet-ring)" stroke-width="13" opacity=".1"/>
       <path d="M35 246a215 61 0 0 1 430 0" stroke="url(#planet-ring)" stroke-width="2" opacity=".55"/>
       <path d="M22 246a228 71 0 0 1 456 0" stroke="#a7b8ff" stroke-width=".7" opacity=".2"/>
     </g>
+    <g data-orbit-layer="back">${moons.filter(moon => Math.sin(moon.phase) < 0).map(moonArtwork).join('')}</g>
     <circle cx="250" cy="246" r="123" stroke="#8399ff" stroke-width="8" opacity=".22" filter="url(#planet-soft-glow)"/>
     <circle cx="250" cy="246" r="122" fill="url(#planet-body)"/>
     <g clip-path="url(#planet-clip)">
@@ -48,7 +69,7 @@ export const heroArt = `<svg class="hero-art" viewBox="0 0 500 500" fill="none" 
       <path d="M35 246a215 61 0 0 0 430 0" stroke="url(#planet-ring)" stroke-width="1.3"/>
       <path d="M22 246a228 71 0 0 0 456 0" stroke="url(#planet-ring)" stroke-width=".7" opacity=".45"/>
     </g>
-    <g class="planet-moon"><circle cx="404" cy="136" r="15" fill="#e7b1ff" opacity=".22" filter="url(#planet-soft-glow)"/><circle cx="404" cy="136" r="7" fill="url(#moon-fill)"/></g>
+    <g data-orbit-layer="front">${moons.filter(moon => Math.sin(moon.phase) >= 0).map(moonArtwork).join('')}</g>
   </g>
   <g stroke-linecap="round">
     <path class="planet-star" d="M114 103v14m-7-7h14" stroke="#b9e8ff" stroke-width="1.2"/>

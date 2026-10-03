@@ -50,7 +50,8 @@ copyButton?.addEventListener('click', async () => {
   }
 });
 
-// The image is the visual fallback. This small canvas adds slow, subtle starlight.
+// The nebula and SVG planets remain visible without JavaScript.
+// One capped animation loop drives the sky and the small orbiting planets.
 const starCanvas = document.querySelector('#starfield');
 const starContext = starCanvas?.getContext('2d');
 if (starContext) {
@@ -60,6 +61,68 @@ if (starContext) {
   let skyHeight = 0;
   let animationFrame = 0;
   let lastFrame = 0;
+  let skyTime = 0;
+  let nextMeteor = 1000;
+  let meteors = [];
+  const backOrbit = document.querySelector('[data-orbit-layer="back"]');
+  const frontOrbit = document.querySelector('[data-orbit-layer="front"]');
+  const moons = [...document.querySelectorAll('.orbiting-moon')].map(element => ({
+    element,
+    rx: Number(element.dataset.orbitRx), ry: Number(element.dataset.orbitRy),
+    tilt: Number(element.dataset.orbitTilt) * Math.PI / 180,
+    period: Number(element.dataset.orbitPeriod), phase: Number(element.dataset.orbitPhase),
+  }));
+  const moveMoons = time => {
+    if (!backOrbit || !frontOrbit) return;
+    for (const moon of moons) {
+      const angle = moon.phase + time / moon.period * Math.PI * 2;
+      const depth = (Math.sin(angle) + 1) / 2;
+      const x = moon.rx * Math.cos(angle), y = moon.ry * Math.sin(angle);
+      const px = 250 + x * Math.cos(moon.tilt) - y * Math.sin(moon.tilt);
+      const py = 246 + x * Math.sin(moon.tilt) + y * Math.cos(moon.tilt);
+      const layer = Math.sin(angle) < 0 ? backOrbit : frontOrbit;
+      if (moon.element.parentNode !== layer) layer.appendChild(moon.element);
+      moon.element.setAttribute('transform', `translate(${px.toFixed(2)} ${py.toFixed(2)}) scale(${(.78 + depth * .32).toFixed(3)})`);
+      moon.element.setAttribute('opacity', (.55 + depth * .45).toFixed(3));
+    }
+  };
+  const paintMeteors = time => {
+    if (reducedMotion.matches) return;
+    if (time >= nextMeteor) {
+      // Keep each pass short, with quiet intervals between shooting stars.
+      if (meteors.length < 2) meteors.push({
+        start: time, duration: 1200 + Math.random() * 600,
+        x: skyWidth * (.38 + Math.random() * .6),
+        y: skyHeight * (.04 + Math.random() * .38),
+        distance: Math.min(skyWidth * .65, 560),
+        tail: Math.min(skyWidth * .23, 145),
+      });
+      nextMeteor = time + 3600 + Math.random() * 4400;
+    }
+    meteors = meteors.filter(meteor => time - meteor.start < meteor.duration);
+    for (const meteor of meteors) {
+      const progress = (time - meteor.start) / meteor.duration;
+      const brightness = Math.sin(progress * Math.PI) * .8;
+      const x = meteor.x - progress * meteor.distance;
+      const y = meteor.y + progress * meteor.distance * .48;
+      const tail = meteor.tail * Math.min(progress * 5, 1);
+      const gradient = starContext.createLinearGradient(x + tail, y - tail * .48, x, y);
+      gradient.addColorStop(0, 'rgba(142,177,255,0)');
+      gradient.addColorStop(.65, `rgba(174,193,255,${brightness * .3})`);
+      gradient.addColorStop(1, `rgba(226,238,255,${brightness})`);
+      starContext.strokeStyle = gradient;
+      starContext.lineWidth = 1.6;
+      starContext.lineCap = 'round';
+      starContext.beginPath();
+      starContext.moveTo(x + tail, y - tail * .48);
+      starContext.lineTo(x, y);
+      starContext.stroke();
+      starContext.fillStyle = `rgba(241,247,255,${brightness})`;
+      starContext.beginPath();
+      starContext.arc(x, y, 1.6, 0, Math.PI * 2);
+      starContext.fill();
+    }
+  };
   const paintStars = time => {
     starContext.clearRect(0, 0, skyWidth, skyHeight);
     for (const star of stars) {
@@ -79,20 +142,29 @@ if (starContext) {
         starContext.stroke();
       }
     }
+    paintMeteors(time);
+    moveMoons(time);
   };
   const animate = time => {
     if (document.hidden || reducedMotion.matches) return;
-    if (time - lastFrame > 45) { paintStars(time); lastFrame = time; }
+    if (!lastFrame) lastFrame = time;
+    if (time - lastFrame >= 32) {
+      skyTime += Math.min(time - lastFrame, 100);
+      paintStars(skyTime);
+      lastFrame = time;
+    }
     animationFrame = requestAnimationFrame(animate);
   };
   const restartSky = () => {
     cancelAnimationFrame(animationFrame);
-    paintStars(0);
+    lastFrame = 0;
+    paintStars(skyTime);
     if (!document.hidden && !reducedMotion.matches) animationFrame = requestAnimationFrame(animate);
   };
   const resizeSky = () => {
     skyWidth = innerWidth;
     skyHeight = innerHeight;
+    meteors = [];
     const ratio = Math.min(devicePixelRatio || 1, 1.5);
     starCanvas.width = Math.round(skyWidth * ratio);
     starCanvas.height = Math.round(skyHeight * ratio);
