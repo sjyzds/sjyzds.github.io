@@ -1,0 +1,99 @@
+{
+  "name": "JingYu Sun",
+  "chineseName": "孙靖宇",
+  "initials": "JS",
+  "role": "Master's student in Software Engineering",
+  "affiliation": "Northwestern Polytechnical University",
+  "school": "School of Software",
+  "email": "sunjingyu04@mail.nwpu.edu.cn",
+  "github": "https://github.com/sjyzds",
+  "scholar": "",
+  "orcid": "",
+  "cv": "",
+  "siteUrl": "https://sjyzds.github.io",
+  "avatar": "images/portrait.jpeg",
+  "about": [
+    "I am a master's student in Software Engineering at Northwestern Polytechnical University. My research interests lie in embodied intelligence and multimodal learning, with a focus on vision-language-action models and selective video-to-audio generation.",
+    "I am currently researching embodied intelligence as an intern at the State Grid AI Laboratory. I am also interested in world models and the adaptation of large language models to practical applications."
+  ],
+  "researchInterests": [
+    "Embodied intelligence",
+    "Vision-language-action",
+    "Multimodal generation",
+    "World models"
+  ],
+  "researchIntro": "Two manuscripts currently under review at ICLR 2027.",
+  "education": [
+    {
+      "dates": "Sep 2025 – Jun 2028 (expected)",
+      "title": "Master's in Software Engineering",
+      "institution": "Northwestern Polytechnical University",
+      "description": "School of Software"
+    },
+    {
+      "dates": "Sep 2021 – Jun 2025",
+      "title": "Bachelor's in Computer Science and Technology",
+      "institution": "Wuhan Textile University",
+      "description": "School of Computer Science · Outstanding Graduate"
+    }
+  ],
+  "experience": [
+    {
+      "dates": "Present",
+      "title": "Research Intern",
+      "institution": "State Grid AI Laboratory",
+      "description": "Research on embodied intelligence."
+    }
+  ],
+  "projects": [
+    {
+      "title": "Robot-state understanding and error correction",
+      "label": "Ongoing research",
+      "description": "Exploring error correction for robotic manipulation on top of MemoryVLA. Using Qwen3-VL to automate annotations of Bridge subtask data and train a model to recognize robot states.",
+      "tags": [
+        "Vision-language-action",
+        "Qwen3-VL",
+        "Bridge"
+      ]
+    },
+    {
+      "title": "A retrieval-augmented legal assistant",
+      "label": "Applied language models",
+      "description": "Built a domain-specific assistant around Qwen2.5-7B, combining QLoRA instruction tuning, DPO preference alignment, and two-stage retrieval with BGE embeddings and reranking. A Gradio interface supports streaming conversations and displays the relevant legal sources.",
+      "tags": [
+        "Qwen2.5",
+        "QLoRA / DPO",
+        "RAG",
+        "LangChain / FAISS"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "label": "Languages",
+      "items": "Python · Java · C++"
+    },
+    {
+      "label": "Deep learning",
+      "items": "PyTorch · Hugging Face · Transformers · PEFT"
+    },
+    {
+      "label": "Model adaptation",
+      "items": "SFT · DPO · LoRA / QLoRA · LLaMA-Factory"
+    }
+  ],
+  "research": [
+    {
+      "topic": "ActSight · Robotic control",
+      "title": "Seeing What Matters for Action: Bridging Visual Priors and Robotic Control in Vision-Language-Action Models",
+      "summary": "Action-sensitive visual refinement and temporal alignment help vision-language-action policies retain the visual information that matters for robotic control.",
+      "status": "Under review at ICLR 2027"
+    },
+    {
+      "topic": "FocusV2A · Video-to-audio generation",
+      "title": "Beyond Target Matching: Measuring and Mitigating Non-Target Leakage in Selective Video-to-Audio Generation",
+      "summary": "Prompt-guided visual selection focuses audio generation on a requested source. VGG-SourcePair measures both target retention and non-target leakage.",
+      "status": "Under review at ICLR 2027"
+    }
+  ]
+}
