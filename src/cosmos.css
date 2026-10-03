@@ -24,7 +24,22 @@ h1{color:#f0f4ff;text-shadow:0 2px 30px #7f9bea14}h1>span{color:#b2bfff}.chinese
 .hero-art{overflow:visible;filter:drop-shadow(0 0 24px #8a9dec10)}
 .canvas-topline{color:#c2ccec;top:24px;letter-spacing:2px;font-size:8px}
 .canvas-bottomline{bottom:11px;left:35px;right:35px}.canvas-caption{color:#a8b9d8}.canvas-caption strong{color:#d1dcf7}.canvas-symbol .icon{color:#b7c7ed}
-.orbital-track{animation-duration:32s}
+/* Slow, restrained motion keeps the illustrations readable. */
+.planet-system{transform-origin:250px 246px;animation:planet-float 16s ease-in-out infinite alternate}
+.planet-star{animation:starlight 5s ease-in-out infinite alternate}.planet-star-late{animation-delay:-3s}
+.diagram-label{font-family:var(--sans);font-size:9.5px;letter-spacing:1.3px;fill:#91b5d3}
+.audio-art .diagram-label{fill:#b2a0cf;letter-spacing:1px}.diagram-text{font-family:var(--sans);font-size:13px;font-weight:500;letter-spacing:.15px}
+.robot-arm{transform-origin:391px 165px;animation:robot-reach 6s ease-in-out infinite}
+.robot-wrist{transform-origin:389px 79px;animation:robot-wrist 6s ease-in-out infinite}
+.vision-feature{animation:feature-light 5s ease-in-out infinite;animation-delay:calc(var(--i) * -.14s)}
+.focus-cell{animation:feature-light 4s ease-in-out infinite}.focus-cell:nth-child(5){animation-delay:-1s}.focus-cell:nth-child(6){animation-delay:-2s}
+.sound-bar{transform-box:fill-box;transform-origin:center;animation:audio-wave 1.8s ease-in-out infinite alternate;animation-delay:calc(var(--i) * -.17s)}
+@keyframes planet-float{from{transform:translateY(4px) rotate(-2deg)}to{transform:translateY(-5px) rotate(2deg)}}
+@keyframes starlight{from{opacity:.35}to{opacity:1}}
+@keyframes robot-reach{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(5deg)}}
+@keyframes robot-wrist{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(9deg)}}
+@keyframes feature-light{0%,100%{opacity:.55}50%{opacity:1}}
+@keyframes audio-wave{from{transform:scaleY(.42);opacity:.65}to{transform:scaleY(1);opacity:1}}
 .hero-foot{border-color:#aabef128}.current-position{color:#a5b4d0}.current-position strong{color:#e0e9fa}.current-label{color:#bdcef2}.status-dot{background:#a8c8ff;box-shadow:0 0 8px #9bbdff52}.current-label .status-dot{box-shadow:0 0 0 4px #9ebfff12,0 0 9px #9ebfff55}.position-separator{color:#7889ad}.hero-scroll{color:#92a5c5}
 .interest-strip{background:#10172b69;border-color:#a9b8e21f;backdrop-filter:blur(13px)}.interest-label{color:#8d9bbd}.interest-item{color:#bcc9e4}.interest-item:before{color:#9aa9e1}
 .eyebrow,.eyebrow>span:first-child{color:#9cadd1}.section-intro{color:#a5b4d0}.section-heading h2{text-shadow:0 2px 22px #05091766}
@@ -41,5 +56,5 @@ h1{color:#f0f4ff;text-shadow:0 2px 30px #7f9bea14}h1>span{color:#b2bfff}.chinese
 @media(max-width:1100px){.hero{padding-top:56px}}
 @media(max-width:850px){.hero{padding-top:44px}.hero-canvas{min-height:385px}.canvas-topline{font-size:6px;letter-spacing:1px}.canvas-bottomline{left:18px;right:18px}}
 @media(max-width:640px){.hero{padding-top:33px;padding-bottom:25px}.cosmos-backdrop{background-position:62% center}.cosmos-backdrop:after{background:linear-gradient(180deg,#03091966,#06091a38 55%,#06091888)}nav{background:#10172cf5;border-color:#9caedf3a;box-shadow:0 15px 30px #0008;backdrop-filter:blur(20px)}nav a[aria-current]{background:#9ab3ff19}.menu-lines:before,.menu-lines:after{background:#d7e2ff}.hero-canvas{min-height:0;margin-top:27px;aspect-ratio:1.35;border-radius:20px;overflow:hidden}.canvas-topline{top:12px;font-size:7px}.canvas-bottomline{bottom:9px;left:17px;right:17px}.canvas-caption{font-size:8px}.research-summary{font-size:13px}.contact-section{background:linear-gradient(145deg,#192846e8,#221c3ee8)}}
-@media(prefers-reduced-motion:reduce){#starfield{opacity:.65}.orbital-track{animation:none}}
+@media(prefers-reduced-motion:reduce){#starfield{opacity:.65}}
 @media print{.cosmos-backdrop,#starfield{display:none}body{background:#fff;color:#172236}.site-header{display:none}.hero-statement,.hero-bio,.identity-role,.identity-school,h1,.chinese-name,.degree,.entry-description,.research-card h3,.research-summary,.research-footer,.project-details>p,.skills h3,.skills p,.current-position,.current-position strong,.dates,.column-title,.section-intro,.eyebrow{color:#26354c;text-shadow:none}.research-card,.experience-entry,.contact-section{background:#fff;box-shadow:none;border-color:#ddd}.contact-email,.contact-section h2,.contact-links>a,.contact-section .eyebrow,.contact-layout>div>p{color:#26354c}.tags li,.school-mark{background:#f3f5fa;color:#304362}.interest-strip{background:#fff}.interest-item,.interest-label{color:#304362}}
