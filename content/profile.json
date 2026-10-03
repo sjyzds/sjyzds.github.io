@@ -86,13 +86,13 @@
     {
       "topic": "ActSight · Robotic control",
       "title": "Seeing What Matters for Action: Bridging Visual Priors and Robotic Control in Vision-Language-Action Models",
-      "summary": "Action-sensitive visual refinement and temporal alignment help vision-language-action policies retain the visual information that matters for robotic control.",
+      "summary": "Visual foundation models offer rich perceptual knowledge, but not every visual detail helps a robot choose the right action. ActSight combines action-sensitive visual refinement with temporal representation alignment, preserving control-relevant cues and relationships across neighboring observations. Across manipulation tasks, it improves control performance over direct feature alignment and visual-enhancement baselines.",
       "status": "Under review at ICLR 2027"
     },
     {
       "topic": "FocusV2A · Video-to-audio generation",
       "title": "Beyond Target Matching: Measuring and Mitigating Non-Target Leakage in Selective Video-to-Audio Generation",
-      "summary": "Prompt-guided visual selection focuses audio generation on a requested source. VGG-SourcePair measures both target retention and non-target leakage.",
+      "summary": "Generating the requested sound is only part of selective video-to-audio generation: other visible sources should remain silent. FocusV2A uses a target prompt to select relevant visual evidence before generating audio, while VGG-SourcePair evaluates both target retention and non-target leakage in dual-source scenes. Experiments show stronger source selectivity while maintaining competitive audio quality and audiovisual synchronization.",
       "status": "Under review at ICLR 2027"
     }
   ]

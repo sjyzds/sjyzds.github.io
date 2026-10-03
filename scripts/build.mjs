@@ -45,18 +45,19 @@ const experience = p.experience.map(entry => `<article class="experience-entry">
 const background = `<section class="section" id="background" aria-labelledby="background-title">${heading('02', 'Background', 'Learning. Exploring. Building.', 'background-title')}<div class="background-grid"><div><h3 class="column-title">Education</h3>${education}</div><div><h3 class="column-title">Research experience</h3>${experience}</div></div></section>`;
 const projects = `<section class="section projects" id="projects" aria-labelledby="projects-title">${heading('03', 'Selected projects', 'From ideas to practice.', 'projects-title')}<div class="project-list">${p.projects.map((project, i) => `<article class="project"><span class="project-index" aria-hidden="true">0${i+1}</span><div class="project-name"><p class="project-label">${esc(project.label)}</p><h3>${esc(project.title)}</h3></div><div class="project-details"><p>${esc(project.description)}</p>${tags(project.tags)}</div></article>`).join('')}</div><div class="skills">${p.skills.map(s => `<div><h3>${esc(s.label)}</h3><p>${esc(s.items)}</p></div>`).join('')}</div></section>`;
 const description = `${p.name}, ${p.role.toLowerCase()} at ${p.affiliation}. Research in embodied intelligence, vision-language-action models, and multimodal generation.`;
-const versions = Object.fromEntries(await Promise.all(['styles.css', 'site.js'].map(async file => [file, createHash('sha256').update(await readFile(resolve(root, 'src', file))).digest('hex').slice(0, 10)])));
+const versions = Object.fromEntries(await Promise.all(['styles.css', 'cosmos.css', 'site.js'].map(async file => [file, createHash('sha256').update(await readFile(resolve(root, 'src', file))).digest('hex').slice(0, 10)])));
 const favicon = `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="18" fill="#213e35"/><text x="32" y="43" font-family="Georgia,serif" font-size="31" fill="#e5edca" text-anchor="middle">JS</text></svg>`)}`;
 const html = `<!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(p.name)} | Embodied Intelligence & Multimodal Learning</title>
-<meta name="description" content="${esc(description)}"><meta name="theme-color" content="#f7f7f2">
+<meta name="description" content="${esc(description)}"><meta name="theme-color" content="#080c1b">
 <link rel="canonical" href="${url(p.siteUrl)}"><link rel="icon" type="image/svg+xml" href="${favicon}">
 <meta property="og:type" content="website"><meta property="og:title" content="${esc(p.name)} | Academic Homepage"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${url(p.siteUrl)}">
 <link rel="preload" href="fonts/newsreader-400.ttf" as="font" type="font/ttf" crossorigin><link rel="preload" href="fonts/inter-400.ttf" as="font" type="font/ttf" crossorigin>
-<link rel="stylesheet" href="styles.css?v=${versions['styles.css']}"><script src="site.js?v=${versions['site.js']}" defer></script>
+<link rel="stylesheet" href="styles.css?v=${versions['styles.css']}"><link rel="stylesheet" href="cosmos.css?v=${versions['cosmos.css']}"><script src="site.js?v=${versions['site.js']}" defer></script>
 </head><body>
+<div class="cosmos-backdrop" aria-hidden="true"></div><canvas id="starfield" aria-hidden="true"></canvas>
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header"><div class="header-inner page-width"><a class="wordmark" href="#about" aria-label="${esc(p.name)}, home"><span class="brand-symbol">${icon('sun')}</span>${esc(p.name)}<span class="brand-period">.</span></a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav"><span class="menu-text">Menu</span><span class="menu-lines" aria-hidden="true"></span></button><nav id="main-nav" aria-label="Main navigation">${sections.map((s,i) => `<a href="#${s.id}"${i === 0 ? ' aria-current="location"' : ''}>${s.label}</a>`).join('')}<a class="nav-contact" href="#contact">Let’s talk ${icon('diagonal')}</a></nav></div></header>
 <main id="main">
@@ -65,9 +66,9 @@ const html = `<!doctype html>
 <div class="page-width">${research}${background}${projects}
 <section class="contact-section" id="contact" aria-labelledby="contact-title"><div class="contact-decoration" aria-hidden="true">${icon('sun')}</div><p class="eyebrow">04 <span>Get in touch</span></p><div class="contact-layout"><div><h2 id="contact-title">Good research starts<br>with a conversation<span>.</span></h2><p>Let’s exchange ideas on embodied intelligence,<br class="desktop-break"> multimodal learning, and what comes next.</p></div><div class="contact-details"><a class="contact-email" href="${email}"><span>${esc(p.email)}</span>${icon('diagonal')}</a><div class="contact-links"><button type="button" class="copy-button" data-copy-email="${esc(p.email)}">${icon('copy')}<span>Copy email</span></button>${externalLink(p.github, `GitHub ${icon('diagonal')}`)}${p.scholar ? externalLink(p.scholar,`Google Scholar ${icon('diagonal')}`) : ''}</div><p class="copy-status" role="status" aria-live="polite"></p></div></div></section></div>
 </main><footer class="site-footer page-width"><a class="footer-brand" href="#about">${icon('sun')} ${esc(p.name)}</a><span>© ${new Date().getUTCFullYear()} · Always learning.</span><a class="back-to-top" href="#about">Back to top ${icon('arrow')}</a></footer></body></html>`;
-for (const file of [p.avatar, 'fonts/inter-400.ttf', 'fonts/inter-600.ttf', 'fonts/newsreader-400.ttf']) await stat(resolve(root, 'public', asset(file)));
+for (const file of [p.avatar, 'images/cosmic-nebula.png', 'fonts/inter-400.ttf', 'fonts/inter-600.ttf', 'fonts/newsreader-400.ttf']) await stat(resolve(root, 'public', asset(file)));
 await cp(resolve(root, 'public'), out, { recursive: true });
-for (const file of ['styles.css', 'site.js']) await copyFile(resolve(root, 'src', file), resolve(out, file));
+for (const file of ['styles.css', 'cosmos.css', 'site.js']) await copyFile(resolve(root, 'src', file), resolve(out, file));
 await writeFile(resolve(out, 'index.html'), html);
 await writeFile(resolve(out, '.nojekyll'), '');
 await writeFile(resolve(out, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${p.siteUrl}/sitemap.xml\n`);

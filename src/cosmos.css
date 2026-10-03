@@ -1,0 +1,45 @@
+/* A quiet, full-page night sky. Text panels stay legible over the nebula. */
+:root{color-scheme:dark;--paper:#080c1b;--ink:#edf2ff;--muted:#a9b5ce;--accent:#a6bafe;--line:#b4c5ee24;--lime:#b9c9ff}
+body{background:#080c1b;position:relative;isolation:isolate}
+::selection{background:#849bda66;color:#fff}
+.cosmos-backdrop{position:fixed;inset:0;z-index:-3;pointer-events:none;background:linear-gradient(180deg,#060b1c3d,#06091a40 60%,#0609188c),url('images/cosmic-nebula.png') center 38%/cover no-repeat}
+.cosmos-backdrop:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#050a1880 0%,#050a1829 48%,#050a180d),radial-gradient(ellipse at 48% 100%,#090c2177,transparent 70%)}
+#starfield{position:fixed;inset:0;z-index:-2;width:100%;height:100%;pointer-events:none;opacity:.8}
+.site-header{background:#090e20c4;border-color:#a9bae91c;backdrop-filter:blur(20px)}
+.brand-symbol{color:#d9e4ff;background:linear-gradient(145deg,#273e70,#28244d);border:1px solid #93aaff40;box-shadow:inset 0 0 14px #758ada15}
+.brand-period{color:#a6b4eb}nav a{color:#a7b2cc}nav a:hover,nav a[aria-current]{color:#fff}nav a:not(.nav-contact):after{background:#b8caff;box-shadow:0 0 8px #abc6ff}
+.nav-contact{color:#e3ebff;border-color:#a4bafa3d;background:#718bba0b}.nav-contact:hover{background:#6882b92b}
+.skip-link{background:#dbe6ff;color:#10172b}a:focus-visible,button:focus-visible{outline-color:#b7c9ff}
+.hero{padding-top:78px;padding-bottom:31px}
+.identity-role{color:#dee6f8}.identity-school{color:#9ba9c8}
+.portrait{border-color:#c4d3ff99;box-shadow:0 0 24px #98b5ff18}
+h1{color:#f0f4ff;text-shadow:0 2px 30px #7f9bea14}h1>span{color:#b2bfff}.chinese-name{color:#a1b0d0}
+.hero-statement{color:#e8edfc}.hero-statement em{color:#aebeff}
+.hero-bio{color:#b0bed7;text-shadow:0 1px 12px #030817}
+.button-primary{color:#10182e;background:linear-gradient(110deg,#d4e2ff,#bcbeef);box-shadow:0 5px 27px #8caaff1c}
+.button-primary:hover{color:#070e1f;background:linear-gradient(110deg,#e3edff,#ceceff);box-shadow:0 8px 35px #9aafff33}
+.social-link{color:#b1bfd9}.social-link:hover{color:#fff}
+.hero-canvas{border-radius:24px;background:transparent;border-color:transparent;overflow:visible;min-height:445px}
+.hero-canvas:before{content:'';position:absolute;inset:7%;border-radius:50%;background:radial-gradient(circle,#6d78d02b,transparent 66%);filter:blur(22px)}
+.hero-art{overflow:visible;filter:drop-shadow(0 0 24px #8a9dec10)}
+.canvas-topline{color:#c2ccec;top:24px;letter-spacing:2px;font-size:8px}
+.canvas-bottomline{bottom:11px;left:35px;right:35px}.canvas-caption{color:#a8b9d8}.canvas-caption strong{color:#d1dcf7}.canvas-symbol .icon{color:#b7c7ed}
+.orbital-track{animation-duration:32s}
+.hero-foot{border-color:#aabef128}.current-position{color:#a5b4d0}.current-position strong{color:#e0e9fa}.current-label{color:#bdcef2}.status-dot{background:#a8c8ff;box-shadow:0 0 8px #9bbdff52}.current-label .status-dot{box-shadow:0 0 0 4px #9ebfff12,0 0 9px #9ebfff55}.position-separator{color:#7889ad}.hero-scroll{color:#92a5c5}
+.interest-strip{background:#10172b69;border-color:#a9b8e21f;backdrop-filter:blur(13px)}.interest-label{color:#8d9bbd}.interest-item{color:#bcc9e4}.interest-item:before{color:#9aa9e1}
+.eyebrow,.eyebrow>span:first-child{color:#9cadd1}.section-intro{color:#a5b4d0}.section-heading h2{text-shadow:0 2px 22px #05091766}
+.research-card{background:#0d1529e8;border-color:#a1b6ef2e;box-shadow:0 12px 36px #03051433;backdrop-filter:blur(16px)}
+.research-card:hover{border-color:#b1c2ff77;box-shadow:0 18px 45px #03051466,0 0 30px #8ba2ee0e}
+.research-visual{background:#0b1425}.visual-1{background:#171126}.visual-label{color:#c1d8ff}.visual-label>span:last-child{border-color:#7b9dd24f}.visual-1 .visual-label{color:#d2bffa}.visual-1 .visual-label>span:last-child{border-color:#ad91cd50}.visual-caption{color:#95accd}.visual-1 .visual-caption{color:#b4a0ce}
+.research-category{color:#9aafd3}.research-card h3{color:#eaf0ff}.research-summary{color:#afbdd7;line-height:1.9;font-size:14px}.research-footer{border-color:#8fa7d62c;color:#b6c8e5}
+.column-title{color:#9caed1}.school-mark{background:#31456842;border-color:#96b1e32e;color:#b4c6eb;backdrop-filter:blur(12px)}.dates{color:#9bafd0}.degree{color:#bdcbe4}.entry-description{color:#9cacc9}
+.experience-entry{background:linear-gradient(135deg,#192642d9,#181e37db);border-color:#96ace52e;backdrop-filter:blur(18px)}.experience-note{border-color:#8fa5d52e;color:#a0b0d0}.experience-note .icon{color:#a3b8df}
+.project-index{color:#8c9dbe}.project-label{color:#9baccb}.project-details>p{color:#aebcd5}.tags li{color:#b5c4e2;background:#7b96d414;border-color:#8ba8e32b}.skills h3{color:#c2d1eb}.skills p{color:#9fafd0}
+.contact-section{background:linear-gradient(115deg,#172849dc,#211b3fde);border:1px solid #a4b2ee38;box-shadow:0 15px 45px #04081842;backdrop-filter:blur(20px);color:#f0f4ff}
+.contact-section .eyebrow,.contact-section .eyebrow>span{color:#b2c2ea}.contact-section h2 span{color:#bdc7ff}.contact-layout>div>p{color:#b0bfdb}.contact-decoration{opacity:.06}.contact-decoration .icon{color:#c2caff}.contact-email{border-color:#a2b4e238;color:#edf3ff}.contact-email .icon{color:#c3ceff}.contact-links>a{color:#c6d4f3}.copy-button{background:#b4c5ef0b;border-color:#a3bce83d;color:#d8e5ff}.copy-button:hover{background:#a4bde51c}.contact-details .copy-status{color:#c4d5ff}
+.site-footer{color:#899dbc}.footer-brand{color:#bccce9}.back-to-top{color:#b0c4e6}
+@media(max-width:1100px){.hero{padding-top:56px}}
+@media(max-width:850px){.hero{padding-top:44px}.hero-canvas{min-height:385px}.canvas-topline{font-size:6px;letter-spacing:1px}.canvas-bottomline{left:18px;right:18px}}
+@media(max-width:640px){.hero{padding-top:33px;padding-bottom:25px}.cosmos-backdrop{background-position:62% center}.cosmos-backdrop:after{background:linear-gradient(180deg,#03091966,#06091a38 55%,#06091888)}nav{background:#10172cf5;border-color:#9caedf3a;box-shadow:0 15px 30px #0008;backdrop-filter:blur(20px)}nav a[aria-current]{background:#9ab3ff19}.menu-lines:before,.menu-lines:after{background:#d7e2ff}.hero-canvas{min-height:0;margin-top:27px;aspect-ratio:1.35;border-radius:20px;overflow:hidden}.canvas-topline{top:12px;font-size:7px}.canvas-bottomline{bottom:9px;left:17px;right:17px}.canvas-caption{font-size:8px}.research-summary{font-size:13px}.contact-section{background:linear-gradient(145deg,#192846e8,#221c3ee8)}}
+@media(prefers-reduced-motion:reduce){#starfield{opacity:.65}.orbital-track{animation:none}}
+@media print{.cosmos-backdrop,#starfield{display:none}body{background:#fff;color:#172236}.site-header{display:none}.hero-statement,.hero-bio,.identity-role,.identity-school,h1,.chinese-name,.degree,.entry-description,.research-card h3,.research-summary,.research-footer,.project-details>p,.skills h3,.skills p,.current-position,.current-position strong,.dates,.column-title,.section-intro,.eyebrow{color:#26354c;text-shadow:none}.research-card,.experience-entry,.contact-section{background:#fff;box-shadow:none;border-color:#ddd}.contact-email,.contact-section h2,.contact-links>a,.contact-section .eyebrow,.contact-layout>div>p{color:#26354c}.tags li,.school-mark{background:#f3f5fa;color:#304362}.interest-strip{background:#fff}.interest-item,.interest-label{color:#304362}}
