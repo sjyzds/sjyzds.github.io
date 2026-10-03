@@ -1,6 +1,7 @@
 import { readFile, writeFile, mkdir, copyFile, cp, stat, readdir, rm, lstat } from 'node:fs/promises';
 import { resolve, dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createHash } from 'node:crypto';
 import { icon, heroArt, researchArt } from './illustrations.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -44,6 +45,7 @@ const experience = p.experience.map(entry => `<article class="experience-entry">
 const background = `<section class="section" id="background" aria-labelledby="background-title">${heading('02', 'Background', 'Learning. Exploring. Building.', 'background-title')}<div class="background-grid"><div><h3 class="column-title">Education</h3>${education}</div><div><h3 class="column-title">Research experience</h3>${experience}</div></div></section>`;
 const projects = `<section class="section projects" id="projects" aria-labelledby="projects-title">${heading('03', 'Selected projects', 'From ideas to practice.', 'projects-title')}<div class="project-list">${p.projects.map((project, i) => `<article class="project"><span class="project-index" aria-hidden="true">0${i+1}</span><div class="project-name"><p class="project-label">${esc(project.label)}</p><h3>${esc(project.title)}</h3></div><div class="project-details"><p>${esc(project.description)}</p>${tags(project.tags)}</div></article>`).join('')}</div><div class="skills">${p.skills.map(s => `<div><h3>${esc(s.label)}</h3><p>${esc(s.items)}</p></div>`).join('')}</div></section>`;
 const description = `${p.name}, ${p.role.toLowerCase()} at ${p.affiliation}. Research in embodied intelligence, vision-language-action models, and multimodal generation.`;
+const versions = Object.fromEntries(await Promise.all(['styles.css', 'site.js'].map(async file => [file, createHash('sha256').update(await readFile(resolve(root, 'src', file))).digest('hex').slice(0, 10)])));
 const favicon = `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="18" fill="#213e35"/><text x="32" y="43" font-family="Georgia,serif" font-size="31" fill="#e5edca" text-anchor="middle">JS</text></svg>`)}`;
 const html = `<!doctype html>
 <html lang="en"><head>
@@ -53,7 +55,7 @@ const html = `<!doctype html>
 <link rel="canonical" href="${url(p.siteUrl)}"><link rel="icon" type="image/svg+xml" href="${favicon}">
 <meta property="og:type" content="website"><meta property="og:title" content="${esc(p.name)} | Academic Homepage"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${url(p.siteUrl)}">
 <link rel="preload" href="fonts/newsreader-400.ttf" as="font" type="font/ttf" crossorigin><link rel="preload" href="fonts/inter-400.ttf" as="font" type="font/ttf" crossorigin>
-<link rel="stylesheet" href="styles.css"><script src="site.js" defer></script>
+<link rel="stylesheet" href="styles.css?v=${versions['styles.css']}"><script src="site.js?v=${versions['site.js']}" defer></script>
 </head><body>
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header"><div class="header-inner page-width"><a class="wordmark" href="#about" aria-label="${esc(p.name)}, home"><span class="brand-symbol">${icon('sun')}</span>${esc(p.name)}<span class="brand-period">.</span></a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav"><span class="menu-text">Menu</span><span class="menu-lines" aria-hidden="true"></span></button><nav id="main-nav" aria-label="Main navigation">${sections.map((s,i) => `<a href="#${s.id}"${i === 0 ? ' aria-current="location"' : ''}>${s.label}</a>`).join('')}<a class="nav-contact" href="#contact">Let’s talk ${icon('diagonal')}</a></nav></div></header>
