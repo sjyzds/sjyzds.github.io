@@ -51,6 +51,7 @@ export const heroArt = `<svg class="hero-art" viewBox="0 0 500 500" fill="none" 
     <circle cx="250" cy="246" r="122" fill="url(#planet-body)"/>
     <g clip-path="url(#planet-clip)">
       <g transform="rotate(-27 250 246)">
+        <g class="planet-clouds">
         <path d="M109 154c75-20 115 23 168 19s80-24 124-10v22c-49-9-77 22-129 14s-96-36-163-20Z" fill="url(#planet-cloud)" opacity=".54"/>
         <path d="M110 190c63-15 105 26 150 18s83-13 138 6" stroke="#cff9ff" stroke-width="3" opacity=".33"/>
         <path d="M105 220c64-28 109 15 158 12s103-34 138-9v27c-43-24-87 6-132 3s-104-36-164-12Z" fill="url(#planet-cloud)" opacity=".46"/>
@@ -59,6 +60,7 @@ export const heroArt = `<svg class="hero-art" viewBox="0 0 500 500" fill="none" 
         <path d="M121 291c53-20 107 17 150 10s82-18 121-1v24c-55-17-90 10-137-3s-83-16-134-4Z" fill="url(#planet-cloud)" opacity=".45"/>
         <path d="M148 332c72-23 127 36 220 1" stroke="#c094ff" stroke-width="4" opacity=".33"/>
         <path d="M162 148c34-5 55 9 78 11M138 225c41-9 67 9 83 10M286 290c19-3 37-11 57-10" stroke="#e1fbff" stroke-width="1.5" stroke-linecap="round" opacity=".48"/>
+        </g>
       </g>
       <circle cx="250" cy="246" r="122" fill="url(#planet-shade)"/>
     </g>
